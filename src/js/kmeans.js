@@ -73,7 +73,7 @@ function KMeans(opts) {
 * console.log(extents); // [{min: 2, max: 4}, {min: 1, max: 7}]
 */
 KMeans.prototype.dataDimensionExtents = function() {
-  data = data || this.data;
+  var data = this.data;
   var extents = [];
 
   for (var i = 0; i < data.length; i++) {
@@ -340,7 +340,7 @@ KMeans.prototype.draw = function() {
   }
 
   // Plot every point onto canvas.
-  for (i = 0; i < data.length; i++) {
+  for (i = 0; i < this.data.length; i++) {
     this.context.save();
 
     point = this.data[i];
