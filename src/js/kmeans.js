@@ -287,7 +287,8 @@ KMeans.prototype.run = function() {
    */
   if (meansMoved) {
     this.draw();
-    this.timer = setTimeout(this.run.bind(this), this.drawDelay);
+    this.run();
+    //this.timer = setTimeout(this.run.bind(this), this.drawDelay);
   } else {
     // Otherwise task has completed.
     console.log('Iteration took for completion: ' + this.iterations);
@@ -415,6 +416,14 @@ KMeans.prototype.clusterColors = function() {
 KMeans.prototype.clusterColor = function(n) {
   return this.clusterColors[n];
 };
+
+KMeans.prototype.getMeans = function() {
+  return this.means;
+};
+
+KMeans.prototype.getAssignments = function() {
+  return this.assignments;
+}
 
 /**
 * fillArray
