@@ -30,6 +30,18 @@ const getClusterList = (assignments, adresses) => {
 	return clustersList;
 }
 
+const appendCluterslistHTML = (clustersList) => {
+	clustersList.forEach((clusterElem, index) => {
+		$("#clustersList").append(`<li id="cluster_${index}">Cluster ${index}`);
+		$(`#cluster_${index}`).append(`<ul id="clusterUL_${index}"></ul>`);
+
+		clusterElem.forEach(c => {
+			$(`#clusterUL_${index}`).append(`<li>${c["standard"]["addresst"]}</li>`);
+		});
+		$("#clustersList").append(`</li>`);
+	});
+}
+
 function processAddresses() {
 	const addressesListText = $("#addressesList").val();
 	const addressesList = addressesListText.split("\n");
@@ -53,5 +65,7 @@ function processAddresses() {
 
 		const clustersList = getClusterList(kmeans.getAssignments(), res);
 		console.log(clustersList);
+
+		appendCluterslistHTML(clustersList);
 	}).catch(error => console.log(error));
 }
