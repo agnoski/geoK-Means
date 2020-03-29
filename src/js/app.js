@@ -78,5 +78,6 @@ function processAddresses() {
 	}).catch(error => {
 		console.log("Error");
 		console.log(error);
+		alert(error.responseText);
 	});
 }

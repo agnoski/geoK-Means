@@ -3,25 +3,33 @@
 <head>
 	<meta charset="utf-8">
 	<title>Geo K-Means</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-	<div>
-		<textarea id="addressesList" rows="4" cols="100" placeholder="Insert addresses in a CSV format"></textarea>
+
+	<div class="hero">
+		<h1>Geo K-Means</h1>
+		<h2>Clusterize addresses with K-Means</h2>
+		<div class="text">
+			<div>
+				<textarea id="addressesList" rows="4" cols="100" placeholder="Insert addresses in a CSV format: street,number,city"></textarea>
+			</div>
+			<button class="btn-show" onclick="processAddresses()">Clusterize</button>
+		</div>
 	</div>
 
-	<div>
-		<button onclick="processAddresses()">Submit</button>
-	</div>
+	<div class="container">
+		<div class="canvasContainer">
+			<canvas id="plot" class="canvasPlot" width="500" height="500"></canvas>
+		</div>
 
-	<div>
-		<canvas id="plot"  width="500" height="500"></canvas>
-	</div>
-
-	<div>
-		<ul id="clustersList">
-			
-		</ul>
+		<div>
+			<p>Clusters:</p>
+			<ul id="clustersList">
+			</ul>
+		</div>
 	</div>
 
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>

@@ -1,0 +1,43 @@
+body {
+	font-family: 'Titillium Web', sans-serif;
+	margin: 0 0;
+	background-color: #f7f7f7;
+}
+
+.hero {
+	color: black;
+	text-align: center;
+	padding-top: 25px;
+}
+
+.btn-show {
+	color: white;
+	background: rgba(130, 130, 130, 0.75);
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+	box-shadow: 0 0 8px 2px #e0e0e0;
+    padding: 8px 16px;
+    margin: 12px;
+}
+
+.btn-show:hover {
+	border: 1px solid #ffffff;
+}
+
+.text {
+	margin: auto;
+}
+
+.container {
+	margin: 50px 0;
+	padding: 0 50px;
+}
+
+.canvasContainer {
+    margin: auto;
+    width: 50%;
+}
+
+.canvasPlot {
+    width: 100%;
+}
