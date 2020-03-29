@@ -1,23 +1,16 @@
-$(document).ready(function() {
-	runApp();
-});
-
-function runApp() {
-	console.log("Ready!")
-}
-
-const url = "https://geocode.xyz/";
-const clusters = 2;
-const delay = 1500;
+const URL = "https://geocode.xyz/";
 
 const splitCSVAddress = addressText => addressText.split(",");
+
 const validateAddress = address => address.length === 3;
+
 const generateAddressObject = element => {
 	const address = {};
 	[address.street, address.number, address.city] = element;
 	return address;
 };
-const formatUrlReq = address => `${url}${address.street},${address.number}+${address.city}?json=1`;
+
+const formatUrlReq = address => `${URL}${address.street},${address.number}+${address.city}?json=1`;
 
 const getClusterList = (assignments, adresses) => {
 	const clustersList = [];
@@ -42,7 +35,7 @@ const appendCluterslistHTML = (clustersList) => {
 	});
 }
 
-function processAddresses() {
+const processAddresses = () => {
 	const addressesListText = $("#addressesList").val();
 	const addressesList = addressesListText.split("\n");
 	const addresses = addressesList.map(splitCSVAddress)
@@ -53,7 +46,7 @@ function processAddresses() {
 	console.log(urlReqs);
 
 	const urlReqTimesPromise = urlReqs.map((urlReq, i) => {
-		return new Promise(resolve => setTimeout(resolve, i*delay)).then(() => {
+		return new Promise(resolve => setTimeout(resolve, i * config.delay)).then(() => {
 			console.log(`json call: ${urlReq}`);
 			return $.getJSON(urlReq);
 		});
@@ -66,10 +59,8 @@ function processAddresses() {
 		var kmeans = new KMeans({
 			canvas: document.getElementById('plot'),
 			data: coords,
-			k: clusters
+			k: config.clusters
 		});
-		console.log(kmeans.getAssignments());
-		console.log(kmeans.getMeans());
 
 		const clustersList = getClusterList(kmeans.getAssignments(), res);
 		console.log(clustersList);
