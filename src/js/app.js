@@ -28,8 +28,11 @@ const appendCluterslistHTML = (clustersList) => {
 		$("#clustersList").append(`<li id="cluster_${index}">Cluster ${index}`);
 		$(`#cluster_${index}`).append(`<ul id="clusterUL_${index}"></ul>`);
 
-		clusterElem.forEach(c => {
-			$(`#clusterUL_${index}`).append(`<li>${c["standard"]["addresst"]}</li>`);
+		clusterElem.forEach(e => {
+			const addresst = e["standard"]["addresst"];
+			const stnumber = e["standard"]["stnumber"] == null ? 0 : e["standard"]["stnumber"];
+			const confidence = e["standard"]["confidence"];
+			$(`#clusterUL_${index}`).append(`<li>${addresst} ${stnumber} (${confidence})</li>`);
 		});
 		$("#clustersList").append(`</li>`);
 	});
@@ -56,6 +59,7 @@ const processAddresses = () => {
 		console.log("Settled");
 		console.log(res);
 		const validRes = res.filter(e => e.status === "fulfilled").map(e => e.value);
+		console.log(validRes);
 		var coords = validRes.map(data => [parseFloat(data.latt), parseFloat(data.longt)]);
 		console.log(coords);
 		var kmeans = new KMeans({
