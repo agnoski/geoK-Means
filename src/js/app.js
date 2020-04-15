@@ -52,17 +52,19 @@ const processAddresses = () => {
 		});
 	});
 
-	Promise.all(urlReqTimesPromise).then(res => {
-		console.log("Success");
+	Promise.allSettled(urlReqTimesPromise).then(res => {
+		console.log("Settled");
 		console.log(res);
-		var coords = res.map(data => [parseFloat(data.latt), parseFloat(data.longt)]);	
+		const validRes = res.filter(e => e.status === "fulfilled").map(e => e.value);
+		var coords = validRes.map(data => [parseFloat(data.latt), parseFloat(data.longt)]);
+		console.log(coords);
 		var kmeans = new KMeans({
 			canvas: document.getElementById('plot'),
 			data: coords,
 			k: config.clusters
 		});
 
-		const clustersList = getClusterList(kmeans.getAssignments(), res);
+		const clustersList = getClusterList(kmeans.getAssignments(), validRes);
 		console.log(clustersList);
 
 		appendCluterslistHTML(clustersList);
